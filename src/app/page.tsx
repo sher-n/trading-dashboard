@@ -11,6 +11,9 @@ import {
   BarChart3,
   RefreshCw,
   Trash2,
+  Wallet,
+  Goal,
+  ShieldAlert,
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import StatsCard from "@/components/StatsCard";
@@ -57,6 +60,16 @@ export default function Dashboard() {
   const [trades, setTrades] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [clearing, setClearing] = useState(false);
+  const [balanceInput, setBalanceInput] = useState("");
+  const [balance, setBalance] = useState<number | null>(null);
+
+  const handleBalanceSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = parseFloat(balanceInput);
+    if (!isNaN(value) && value > 0) {
+      setBalance(value);
+    }
+  };
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -142,6 +155,68 @@ export default function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+        {/* Account Balance Section */}
+        <section className="bg-gray-800/60 backdrop-blur border border-gray-700/50 rounded-xl p-5">
+          <form onSubmit={handleBalanceSubmit} className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Wallet className="w-5 h-5 text-blue-400" />
+              <label className="text-gray-300 font-medium">Account Balance</label>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-gray-400">$</span>
+              <input
+                type="number"
+                value={balanceInput}
+                onChange={(e) => setBalanceInput(e.target.value)}
+                placeholder="Enter balance"
+                className="bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white w-40 focus:outline-none focus:border-blue-500"
+                step="0.01"
+                min="0"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
+              >
+                Set
+              </button>
+            </div>
+          </form>
+
+          {balance !== null && (
+            <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-700/50">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-500/20 rounded-lg">
+                  <Wallet className="w-5 h-5 text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Current Balance</p>
+                  <p className="text-white font-bold text-lg">${balance.toLocaleString()}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-green-500/20 rounded-lg">
+                  <Goal className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Profit Goal (3%)</p>
+                  <p className="text-green-400 font-bold text-lg">+${(balance * 0.03).toFixed(2)}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-yellow-500/20 rounded-lg">
+                  <ShieldAlert className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Risk/Position (0.5-1%)</p>
+                  <p className="text-yellow-400 font-bold text-lg">
+                    ${(balance * 0.005).toFixed(2)} - ${(balance * 0.01).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
         {/* Stats Overview */}
         {stats && stats.totalTrades > 0 && (
           <>
