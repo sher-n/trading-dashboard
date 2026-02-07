@@ -139,7 +139,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Monthly summary */}
-      <div className="flex items-center justify-center gap-3 mb-1 text-[10px]">
+      {/* <div className="flex items-center justify-center gap-3 mb-1 text-[10px]">
         <span className="text-[var(--text)]/50">
           {monthTotal.tradingDays} day{monthTotal.tradingDays !== 1 ? "s" : ""}
         </span>
@@ -153,7 +153,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
         >
           {monthTotal.pnl >= 0 ? "+" : ""}${monthTotal.pnl.toFixed(2)}
         </span>
-      </div>
+      </div> */}
 
       {/* Weekday headers */}
       <div className="grid grid-cols-7 gap-1">
