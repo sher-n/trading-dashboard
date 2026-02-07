@@ -115,33 +115,33 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
   return (
     <div>
       {/* Header: Title (left) + Month Navigation (right) */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-[var(--text)]">
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="text-sm font-semibold text-[var(--text)]">
           Trade Calendar
         </h2>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <button
             onClick={prevMonth}
-            className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
+            className="p-1 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
-          <span className="text-[var(--text)] font-semibold min-w-[140px] text-center">
+          <span className="text-[var(--text)] font-semibold text-sm min-w-[120px] text-center">
             {monthLabel}
           </span>
           <button
             onClick={nextMonth}
-            className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
+            className="p-1 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       {/* Monthly summary */}
-      <div className="flex items-center justify-center gap-6 mb-4 text-lg">
+      <div className="flex items-center justify-center gap-4 mb-2 text-xs">
         <span className="text-[var(--text)]/50">
-          {monthTotal.tradingDays} trading day{monthTotal.tradingDays !== 1 ? "s" : ""}
+          {monthTotal.tradingDays} day{monthTotal.tradingDays !== 1 ? "s" : ""}
         </span>
         <span className="text-[var(--text)]/50">
           {monthTotal.tradeCount} trade{monthTotal.tradeCount !== 1 ? "s" : ""}
@@ -156,11 +156,11 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Weekday headers */}
-      <div className="grid grid-cols-7 gap-2 mb-1 ">
+      <div className="grid grid-cols-7 gap-1.5 mb-0.5">
         {weekdays.map((day) => (
           <div
             key={day}
-            className="text-center text-lg text-[var(--text)]/40 font-medium py-1"
+            className="text-center text-xs text-[var(--text)]/40 font-medium py-0.5"
           >
             {day}
           </div>
@@ -168,7 +168,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-2 ">
+      <div className="grid grid-cols-7 gap-1.5">
         {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square" />
@@ -192,14 +192,14 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {/* Top row: date (left) + trade count (right) */}
               <div className="flex items-start justify-between">
                 <span
-                  className={`text-lg font-medium leading-none m-2 ${
+                  className={`text-xs font-medium leading-none ${
                     data ? "text-[var(--text)]/70" : "text-[var(--text)]/25"
                   }`}
                 >
                   {day}
                 </span>
                 {data && (
-                  <span className="text-[20px] text-[var(--text)]/40 leading-none m-2">
+                  <span className="text-[10px] text-[var(--text)]/40 leading-none">
                     {data.tradeCount}T
                   </span>
                 )}
@@ -209,14 +209,14 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {data && (
                 <div className="flex justify-end">
                   <span
-                    className={`text-[20px] font-bold leading-none m-2 ${
+                    className={`text-sm font-bold leading-none ${
                       data.pnl >= 0 ? "text-[var(--green)]" : "text-[var(--red)]"
                     }`}
                   >
                     {data.pnl >= 0 ? "+" : ""}
                     {Math.abs(data.pnl) >= 1000
-                      ? `$${(data.pnl / 1000).toFixed(1)}k USD`
-                      : `$${data.pnl.toFixed(0)} USD`}
+                      ? `$${(data.pnl / 1000).toFixed(1)}k`
+                      : `$${data.pnl.toFixed(0)}`}
                   </span>
                 </div>
               )}
@@ -224,7 +224,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {/* Tooltip */}
               {data && (
                 <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[var(--bg)] border border-[var(--text)]/20 rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-10 whitespace-nowrap">
-                  <p className="text-[var(--text)] text-lg font-semibold">
+                  <p className="text-[var(--text)] text-xs font-semibold">
                     {new Date(viewYear, viewMonth, day).toLocaleDateString("en-US", {
                       weekday: "short",
                       month: "short",
