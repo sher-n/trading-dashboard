@@ -346,9 +346,6 @@ export default function Dashboard() {
 
             {/* Trade Calendar */}
             <section className="bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
-              <h2 className="text-lg font-semibold text-[var(--text)] mb-4">
-                Trade Calendar
-              </h2>
               <TradeCalendar trades={trades} />
             </section>
 

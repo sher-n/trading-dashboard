@@ -114,21 +114,28 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
 
   return (
     <div>
-      {/* Navigation */}
+      {/* Header: Title (left) + Month Navigation (right) */}
       <div className="flex items-center justify-between mb-4">
-        <button
-          onClick={prevMonth}
-          className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <span className="text-[var(--text)] font-semibold">{monthLabel}</span>
-        <button
-          onClick={nextMonth}
-          className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        <h2 className="text-lg font-semibold text-[var(--text)]">
+          Trade Calendar
+        </h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={prevMonth}
+            className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <span className="text-[var(--text)] font-semibold min-w-[140px] text-center">
+            {monthLabel}
+          </span>
+          <button
+            onClick={nextMonth}
+            className="p-1.5 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Monthly summary */}
@@ -149,7 +156,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Weekday headers */}
-      <div className="grid grid-cols-7 gap-2 mb-1 max-w-[700px] mx-auto">
+      <div className="grid grid-cols-7 gap-2 mb-1 ">
         {weekdays.map((day) => (
           <div
             key={day}
@@ -161,7 +168,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-2 max-w-[700px] mx-auto">
+      <div className="grid grid-cols-7 gap-2 ">
         {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square" />
