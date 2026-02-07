@@ -4,13 +4,25 @@ import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Trade {
-  exitTime: string;
-  netPnl: number;
-  pnl: number;
+  // Support both camelCase and snake_case (API returns snake_case from SQLite)
+  exitTime?: string;
+  exit_time?: string;
+  netPnl?: number;
+  net_pnl?: number;
+  pnl?: number;
+  [key: string]: unknown;
 }
 
 interface TradeCalendarProps {
   trades: Trade[];
+}
+
+function getExitTime(trade: Trade): string | undefined {
+  return (trade.exitTime ?? trade.exit_time) as string | undefined;
+}
+
+function getPnl(trade: Trade): number {
+  return (trade.net_pnl ?? trade.netPnl ?? trade.pnl ?? 0) as number;
 }
 
 interface DayData {
@@ -30,11 +42,12 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
   const dailyPnl = useMemo(() => {
     const map = new Map<string, DayData>();
     for (const trade of trades) {
-      if (!trade.exitTime) continue;
-      const date = new Date(trade.exitTime);
+      const exitTime = getExitTime(trade);
+      if (!exitTime) continue;
+      const date = new Date(exitTime);
       const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
       const existing = map.get(key) || { pnl: 0, tradeCount: 0 };
-      existing.pnl += trade.netPnl ?? trade.pnl ?? 0;
+      existing.pnl += getPnl(trade);
       existing.tradeCount += 1;
       map.set(key, existing);
     }
@@ -45,8 +58,8 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
   const defaultDate = useMemo(() => {
     if (trades.length === 0) return new Date();
     const dates = trades
-      .filter((t) => t.exitTime)
-      .map((t) => new Date(t.exitTime));
+      .filter((t) => getExitTime(t))
+      .map((t) => new Date(getExitTime(t)!));
     if (dates.length === 0) return new Date();
     return dates.reduce((a, b) => (a > b ? a : b));
   }, [trades]);
