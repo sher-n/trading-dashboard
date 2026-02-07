@@ -139,7 +139,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
       </div>
 
       {/* Monthly summary */}
-      <div className="flex items-center justify-center gap-6 mb-4 text-sm">
+      <div className="flex items-center justify-center gap-6 mb-4 text-lg">
         <span className="text-[var(--text)]/50">
           {monthTotal.tradingDays} trading day{monthTotal.tradingDays !== 1 ? "s" : ""}
         </span>
@@ -160,7 +160,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
         {weekdays.map((day) => (
           <div
             key={day}
-            className="text-center text-sm text-[var(--text)]/40 font-medium py-1"
+            className="text-center text-lg text-[var(--text)]/40 font-medium py-1"
           >
             {day}
           </div>
@@ -192,14 +192,14 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {/* Top row: date (left) + trade count (right) */}
               <div className="flex items-start justify-between">
                 <span
-                  className={`text-xs font-medium leading-none ${
+                  className={`text-lg font-medium leading-none m-2 ${
                     data ? "text-[var(--text)]/70" : "text-[var(--text)]/25"
                   }`}
                 >
                   {day}
                 </span>
                 {data && (
-                  <span className="text-[10px] text-[var(--text)]/40 leading-none">
+                  <span className="text-[20px] text-[var(--text)]/40 leading-none m-2">
                     {data.tradeCount}T
                   </span>
                 )}
@@ -209,14 +209,14 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {data && (
                 <div className="flex justify-end">
                   <span
-                    className={`text-sm font-bold leading-none ${
+                    className={`text-[20px] font-bold leading-none m-2 ${
                       data.pnl >= 0 ? "text-[var(--green)]" : "text-[var(--red)]"
                     }`}
                   >
                     {data.pnl >= 0 ? "+" : ""}
                     {Math.abs(data.pnl) >= 1000
-                      ? `$${(data.pnl / 1000).toFixed(1)}k`
-                      : `$${data.pnl.toFixed(0)}`}
+                      ? `$${(data.pnl / 1000).toFixed(1)}k USD`
+                      : `$${data.pnl.toFixed(0)} USD`}
                   </span>
                 </div>
               )}
@@ -224,7 +224,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {/* Tooltip */}
               {data && (
                 <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[var(--bg)] border border-[var(--text)]/20 rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-10 whitespace-nowrap">
-                  <p className="text-[var(--text)] text-xs font-semibold">
+                  <p className="text-[var(--text)] text-lg font-semibold">
                     {new Date(viewYear, viewMonth, day).toLocaleDateString("en-US", {
                       weekday: "short",
                       month: "short",
