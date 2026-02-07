@@ -20,6 +20,7 @@ import StatsCard from "@/components/StatsCard";
 import PnLChart from "@/components/PnLChart";
 import TradesTable from "@/components/TradesTable";
 import SymbolStats from "@/components/SymbolStats";
+import TradeCalendar from "@/components/TradeCalendar";
 
 interface TradingStats {
   totalTrades: number;
@@ -341,6 +342,14 @@ export default function Dashboard() {
                 </h2>
                 <SymbolStats data={stats.symbolStats} />
               </div>
+            </section>
+
+            {/* Trade Calendar */}
+            <section className="bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
+              <h2 className="text-lg font-semibold text-[var(--text)] mb-4">
+                Trade Calendar
+              </h2>
+              <TradeCalendar trades={trades} />
             </section>
 
             {/* Trades Table */}
