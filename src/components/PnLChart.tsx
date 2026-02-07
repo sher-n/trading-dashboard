@@ -24,7 +24,7 @@ interface PnLChartProps {
 export default function PnLChart({ data }: PnLChartProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="h-[300px] flex items-center justify-center text-[var(--text)]/50">
+      <div className="h-[250px] flex items-center justify-center text-[var(--text)]/50">
         No trading data available
       </div>
     );
@@ -49,7 +49,7 @@ export default function PnLChart({ data }: PnLChartProps) {
   const lineColor = chartData[chartData.length - 1]?.pnl >= 0 ? "#298931" : "#a01c1a";
 
   return (
-    <div className="h-[300px] w-full">
+    <div className="h-[250px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
