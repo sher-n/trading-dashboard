@@ -81,8 +81,8 @@ export default function FileUpload({ onUploadComplete }: FileUploadProps) {
       <button
         className={`p-2 rounded-lg transition-colors ${
           showSuccess
-            ? "text-green-400 bg-green-500/10"
-            : "text-gray-400 hover:text-white hover:bg-gray-800"
+            ? "text-[var(--green)] bg-[var(--green)]/10"
+            : "text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10"
         }`}
         title="Upload CSV"
         disabled={isUploading}

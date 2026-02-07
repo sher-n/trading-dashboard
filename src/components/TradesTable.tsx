@@ -48,7 +48,7 @@ function formatDate(dateStr: string | null): string {
 export default function TradesTable({ trades }: TradesTableProps) {
   if (!trades || trades.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-[var(--text)]/50">
         No trades to display
       </div>
     );
@@ -58,32 +58,32 @@ export default function TradesTable({ trades }: TradesTableProps) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-700">
-            <th className="text-left py-3 px-4 text-gray-400 font-medium">Symbol</th>
-            <th className="text-left py-3 px-4 text-gray-400 font-medium">Direction</th>
-            <th className="text-left py-3 px-4 text-gray-400 font-medium">Entry</th>
-            <th className="text-left py-3 px-4 text-gray-400 font-medium">Exit</th>
-            <th className="text-right py-3 px-4 text-gray-400 font-medium">Qty</th>
-            <th className="text-right py-3 px-4 text-gray-400 font-medium">P&L</th>
-            <th className="text-right py-3 px-4 text-gray-400 font-medium">Duration</th>
-            <th className="text-left py-3 px-4 text-gray-400 font-medium">Exit Type</th>
+          <tr className="border-b border-[var(--text)]/20">
+            <th className="text-left py-3 px-4 text-[var(--text)]/50 font-medium">Symbol</th>
+            <th className="text-left py-3 px-4 text-[var(--text)]/50 font-medium">Direction</th>
+            <th className="text-left py-3 px-4 text-[var(--text)]/50 font-medium">Entry</th>
+            <th className="text-left py-3 px-4 text-[var(--text)]/50 font-medium">Exit</th>
+            <th className="text-right py-3 px-4 text-[var(--text)]/50 font-medium">Qty</th>
+            <th className="text-right py-3 px-4 text-[var(--text)]/50 font-medium">P&L</th>
+            <th className="text-right py-3 px-4 text-[var(--text)]/50 font-medium">Duration</th>
+            <th className="text-left py-3 px-4 text-[var(--text)]/50 font-medium">Exit Type</th>
           </tr>
         </thead>
         <tbody>
           {trades.map((trade) => (
             <tr
               key={trade.id}
-              className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
+              className="border-b border-[var(--text)]/10 hover:bg-[var(--text)]/5 transition-colors"
             >
               <td className="py-3 px-4">
-                <span className="font-medium text-white">{trade.symbol}</span>
+                <span className="font-medium text-[var(--text)]">{trade.symbol}</span>
               </td>
               <td className="py-3 px-4">
                 <span
                   className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${
                     trade.direction === "Long"
-                      ? "bg-green-500/20 text-green-400"
-                      : "bg-red-500/20 text-red-400"
+                      ? "bg-[var(--green)]/15 text-[var(--green)]"
+                      : "bg-[var(--red)]/15 text-[var(--red)]"
                   }`}
                 >
                   {trade.direction === "Long" ? (
@@ -94,31 +94,31 @@ export default function TradesTable({ trades }: TradesTableProps) {
                   {trade.direction}
                 </span>
               </td>
-              <td className="py-3 px-4 text-gray-300">
+              <td className="py-3 px-4 text-[var(--text)]/70">
                 <div>{formatDate(trade.entry_time)}</div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-[var(--text)]/40">
                   @ ${trade.entry_price?.toFixed(2)}
                 </div>
               </td>
-              <td className="py-3 px-4 text-gray-300">
+              <td className="py-3 px-4 text-[var(--text)]/70">
                 <div>{formatDate(trade.exit_time)}</div>
                 {trade.exit_price && (
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-[var(--text)]/40">
                     @ ${trade.exit_price.toFixed(2)}
                   </div>
                 )}
               </td>
-              <td className="py-3 px-4 text-right text-gray-300">
+              <td className="py-3 px-4 text-right text-[var(--text)]/70">
                 {trade.qty}
               </td>
               <td className="py-3 px-4 text-right">
                 <span
                   className={`font-medium ${
                     trade.pnl === null
-                      ? "text-gray-500"
+                      ? "text-[var(--text)]/50"
                       : trade.pnl >= 0
-                      ? "text-green-400"
-                      : "text-red-400"
+                      ? "text-[var(--green)]"
+                      : "text-[var(--red)]"
                   }`}
                 >
                   {trade.pnl !== null
@@ -126,7 +126,7 @@ export default function TradesTable({ trades }: TradesTableProps) {
                     : "-"}
                 </span>
               </td>
-              <td className="py-3 px-4 text-right text-gray-300">
+              <td className="py-3 px-4 text-right text-[var(--text)]/70">
                 {formatDuration(trade.duration_seconds)}
               </td>
               <td className="py-3 px-4">
@@ -134,16 +134,16 @@ export default function TradesTable({ trades }: TradesTableProps) {
                   <span
                     className={`text-xs px-2 py-1 rounded ${
                       trade.exit_type === "Take Profit"
-                        ? "bg-green-500/20 text-green-400"
+                        ? "bg-[var(--green)]/15 text-[var(--green)]"
                         : trade.exit_type === "Stop Loss"
-                        ? "bg-red-500/20 text-red-400"
-                        : "bg-gray-500/20 text-gray-400"
+                        ? "bg-[var(--red)]/15 text-[var(--red)]"
+                        : "bg-[var(--text)]/10 text-[var(--text)]/60"
                     }`}
                   >
                     {trade.exit_type}
                   </span>
                 ) : (
-                  <span className="text-xs text-yellow-500">Open</span>
+                  <span className="text-xs text-[var(--text)]/50">Open</span>
                 )}
               </td>
             </tr>

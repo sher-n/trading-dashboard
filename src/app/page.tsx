@@ -117,18 +117,18 @@ export default function Dashboard() {
   }, [fetchData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800">
+    <div className="min-h-screen bg-[var(--bg)]">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-[var(--text)]/15 bg-[var(--bg)] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-500/20 rounded-lg">
-                <BarChart3 className="w-6 h-6 text-blue-400" />
+              <div className="p-2 bg-[var(--green)]/15 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-[var(--green)]" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Trading Dashboard</h1>
-                <p className="text-gray-500 text-sm">Analyze your trading performance</p>
+                <h1 className="text-xl font-bold text-[var(--text)]">Trading Dashboard</h1>
+                <p className="text-[var(--text)]/50 text-sm">Analyze your trading performance</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export default function Dashboard() {
               <button
                 onClick={fetchData}
                 disabled={loading}
-                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 text-[var(--text)]/50 hover:text-[var(--text)] hover:bg-[var(--text)]/10 rounded-lg transition-colors"
                 title="Refresh"
               >
                 <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
@@ -144,7 +144,7 @@ export default function Dashboard() {
               <button
                 onClick={handleClear}
                 disabled={clearing}
-                className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                className="p-2 text-[var(--text)]/50 hover:text-[var(--red)] hover:bg-[var(--red)]/10 rounded-lg transition-colors"
                 title="Clear all data"
               >
                 <Trash2 className={`w-5 h-5 ${clearing ? "animate-pulse" : ""}`} />
@@ -156,26 +156,26 @@ export default function Dashboard() {
 
       <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
         {/* Account Balance Section */}
-        <section className="bg-gray-800/60 backdrop-blur border border-gray-700/50 rounded-xl p-5">
+        <section className="bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
           <form onSubmit={handleBalanceSubmit} className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Wallet className="w-5 h-5 text-blue-400" />
-              <label className="text-gray-300 font-medium">Account Balance</label>
+              <Wallet className="w-5 h-5 text-[var(--green)]" />
+              <label className="text-[var(--text)] font-medium">Account Balance</label>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">$</span>
+              <span className="text-[var(--text)]/50">$</span>
               <input
                 type="number"
                 value={balanceInput}
                 onChange={(e) => setBalanceInput(e.target.value)}
                 placeholder="Enter balance"
-                className="bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white w-40 focus:outline-none focus:border-blue-500"
+                className="bg-[var(--text)]/5 border border-[var(--text)]/20 rounded-lg px-3 py-2 text-[var(--text)] w-40 focus:outline-none focus:border-[var(--green)]"
                 step="0.01"
                 min="0"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[var(--green)] hover:bg-[var(--green)]/85 text-[var(--bg)] rounded-lg transition-colors"
               >
                 Set
               </button>
@@ -183,32 +183,32 @@ export default function Dashboard() {
           </form>
 
           {balance !== null && (
-            <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-700/50">
+            <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-[var(--text)]/15">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <Wallet className="w-5 h-5 text-blue-400" />
+                <div className="p-2 bg-[var(--green)]/15 rounded-lg">
+                  <Wallet className="w-5 h-5 text-[var(--green)]" />
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Current Balance</p>
-                  <p className="text-white font-bold text-lg">${balance.toLocaleString()}</p>
+                  <p className="text-[var(--text)]/50 text-sm">Current Balance</p>
+                  <p className="text-[var(--text)] font-bold text-lg">${balance.toLocaleString()}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-500/20 rounded-lg">
-                  <Goal className="w-5 h-5 text-green-400" />
+                <div className="p-2 bg-[var(--green)]/15 rounded-lg">
+                  <Goal className="w-5 h-5 text-[var(--green)]" />
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Profit Goal (3%)</p>
-                  <p className="text-green-400 font-bold text-lg">+${(balance * 0.03).toFixed(2)}</p>
+                  <p className="text-[var(--text)]/50 text-sm">Profit Goal (3%)</p>
+                  <p className="text-[var(--green)] font-bold text-lg">+${(balance * 0.03).toFixed(2)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-yellow-500/20 rounded-lg">
-                  <ShieldAlert className="w-5 h-5 text-yellow-400" />
+                <div className="p-2 bg-[var(--red)]/15 rounded-lg">
+                  <ShieldAlert className="w-5 h-5 text-[var(--red)]" />
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Risk/Position (0.5-1%)</p>
-                  <p className="text-yellow-400 font-bold text-lg">
+                  <p className="text-[var(--text)]/50 text-sm">Risk/Position (0.5-1%)</p>
+                  <p className="text-[var(--red)] font-bold text-lg">
                     ${(balance * 0.005).toFixed(2)} - ${(balance * 0.01).toFixed(2)}
                   </p>
                 </div>
@@ -229,9 +229,9 @@ export default function Dashboard() {
                 trend={stats.totalNetPnl >= 0 ? "up" : "down"}
                 icon={
                   stats.totalNetPnl >= 0 ? (
-                    <TrendingUp className="w-5 h-5 text-green-400" />
+                    <TrendingUp className="w-5 h-5 text-[var(--green)]" />
                   ) : (
-                    <TrendingDown className="w-5 h-5 text-red-400" />
+                    <TrendingDown className="w-5 h-5 text-[var(--red)]" />
                   )
                 }
               />
@@ -240,20 +240,20 @@ export default function Dashboard() {
                 value={`${stats.winRate.toFixed(1)}%`}
                 subtitle={`${stats.winningTrades}W / ${stats.losingTrades}L`}
                 trend={stats.winRate >= 50 ? "up" : "down"}
-                icon={<Target className="w-5 h-5 text-blue-400" />}
+                icon={<Target className="w-5 h-5 text-[var(--green)]" />}
               />
               <StatsCard
                 title="Profit Factor"
                 value={stats.profitFactor === Infinity ? "∞" : stats.profitFactor.toFixed(2)}
                 subtitle="Gross Profit / Gross Loss"
                 trend={stats.profitFactor >= 1 ? "up" : "down"}
-                icon={<Award className="w-5 h-5 text-yellow-400" />}
+                icon={<Award className="w-5 h-5 text-[var(--text)]" />}
               />
               <StatsCard
                 title="Total Trades"
                 value={stats.totalTrades}
                 subtitle={`${stats.avgTradesPerDay.toFixed(1)}/day avg`}
-                icon={<Clock className="w-5 h-5 text-purple-400" />}
+                icon={<Clock className="w-5 h-5 text-[var(--text)]" />}
               />
             </section>
 
@@ -276,14 +276,14 @@ export default function Dashboard() {
                 value={stats.maxWinStreak}
                 subtitle={`Current: ${stats.currentWinStreak}`}
                 trend="up"
-                icon={<TrendingUp className="w-5 h-5 text-green-400" />}
+                icon={<TrendingUp className="w-5 h-5 text-[var(--green)]" />}
               />
               <StatsCard
                 title="Lose Streak"
                 value={stats.maxLoseStreak}
                 subtitle={`Current: ${stats.currentLoseStreak}`}
                 trend="down"
-                icon={<AlertTriangle className="w-5 h-5 text-red-400" />}
+                icon={<AlertTriangle className="w-5 h-5 text-[var(--red)]" />}
               />
             </section>
 
@@ -294,14 +294,14 @@ export default function Dashboard() {
                 value={`+$${stats.maxEquity.toFixed(2)}`}
                 subtitle="Peak equity"
                 trend="up"
-                icon={<TrendingUp className="w-5 h-5 text-green-400" />}
+                icon={<TrendingUp className="w-5 h-5 text-[var(--green)]" />}
               />
               <StatsCard
                 title="Max Downside"
                 value={`$${stats.minEquity.toFixed(2)}`}
                 subtitle="Lowest equity"
                 trend="down"
-                icon={<TrendingDown className="w-5 h-5 text-red-400" />}
+                icon={<TrendingDown className="w-5 h-5 text-[var(--red)]" />}
               />
             </section>
 
@@ -327,16 +327,16 @@ export default function Dashboard() {
             {/* Charts Section */}
             <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* PnL Curve */}
-              <div className="lg:col-span-2 bg-gray-800/60 backdrop-blur border border-gray-700/50 rounded-xl p-5">
-                <h2 className="text-lg font-semibold text-white mb-4">
+              <div className="lg:col-span-2 bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
+                <h2 className="text-lg font-semibold text-[var(--text)] mb-4">
                   Equity Curve (Cumulative P&L)
                 </h2>
                 <PnLChart data={stats.pnlCurve} />
               </div>
 
               {/* Symbol Performance */}
-              <div className="bg-gray-800/60 backdrop-blur border border-gray-700/50 rounded-xl p-5">
-                <h2 className="text-lg font-semibold text-white mb-4">
+              <div className="bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
+                <h2 className="text-lg font-semibold text-[var(--text)] mb-4">
                   P&L by Symbol
                 </h2>
                 <SymbolStats data={stats.symbolStats} />
@@ -344,8 +344,8 @@ export default function Dashboard() {
             </section>
 
             {/* Trades Table */}
-            <section className="bg-gray-800/60 backdrop-blur border border-gray-700/50 rounded-xl p-5">
-              <h2 className="text-lg font-semibold text-white mb-4">
+            <section className="bg-[var(--bg)] border border-[var(--text)]/15 rounded-xl p-5">
+              <h2 className="text-lg font-semibold text-[var(--text)] mb-4">
                 Trade History ({trades.length} trades)
               </h2>
               <TradesTable trades={trades} />
@@ -356,13 +356,13 @@ export default function Dashboard() {
         {/* Empty State */}
         {!loading && (!stats || stats.totalTrades === 0) && (
           <div className="text-center py-16">
-            <div className="p-4 bg-gray-800/50 rounded-full w-fit mx-auto mb-4">
-              <BarChart3 className="w-12 h-12 text-gray-600" />
+            <div className="p-4 bg-[var(--text)]/10 rounded-full w-fit mx-auto mb-4">
+              <BarChart3 className="w-12 h-12 text-[var(--text)]/30" />
             </div>
-            <h2 className="text-xl font-semibold text-gray-300 mb-2">
+            <h2 className="text-xl font-semibold text-[var(--text)] mb-2">
               No trading data yet
             </h2>
-            <p className="text-gray-500">
+            <p className="text-[var(--text)]/50">
               Upload your TradingView CSV file to see your trading statistics
             </p>
           </div>
@@ -371,15 +371,15 @@ export default function Dashboard() {
         {/* Loading State */}
         {loading && (!stats || stats.totalTrades === 0) && (
           <div className="text-center py-16">
-            <RefreshCw className="w-8 h-8 text-blue-400 animate-spin mx-auto mb-4" />
-            <p className="text-gray-400">Loading trading data...</p>
+            <RefreshCw className="w-8 h-8 text-[var(--green)] animate-spin mx-auto mb-4" />
+            <p className="text-[var(--text)]/50">Loading trading data...</p>
           </div>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 mt-12 py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+      <footer className="border-t border-[var(--text)]/15 mt-12 py-6">
+        <div className="max-w-7xl mx-auto px-4 text-center text-[var(--text)]/50 text-sm">
           Trading Dashboard • Built with Next.js, Drizzle ORM & SQLite
         </div>
       </footer>

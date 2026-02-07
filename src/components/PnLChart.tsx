@@ -24,7 +24,7 @@ interface PnLChartProps {
 export default function PnLChart({ data }: PnLChartProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="h-[300px] flex items-center justify-center text-gray-500">
+      <div className="h-[300px] flex items-center justify-center text-[var(--text)]/50">
         No trading data available
       </div>
     );
@@ -46,48 +46,43 @@ export default function PnLChart({ data }: PnLChartProps) {
   const maxPnl = Math.max(...data.map((d) => d.pnl));
   const padding = (maxPnl - minPnl) * 0.1 || 10;
 
+  const lineColor = chartData[chartData.length - 1]?.pnl >= 0 ? "#298931" : "#a01c1a";
+
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="pnlGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor={chartData[chartData.length - 1]?.pnl >= 0 ? "#22c55e" : "#ef4444"}
-                stopOpacity={0.3}
-              />
-              <stop
-                offset="95%"
-                stopColor={chartData[chartData.length - 1]?.pnl >= 0 ? "#22c55e" : "#ef4444"}
-                stopOpacity={0}
-              />
+              <stop offset="5%" stopColor={lineColor} stopOpacity={0.3} />
+              <stop offset="95%" stopColor={lineColor} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(33, 42, 31, 0.12)" vertical={false} />
           <XAxis
             dataKey="formattedTime"
-            tick={{ fill: "#9ca3af", fontSize: 11 }}
-            tickLine={{ stroke: "#4b5563" }}
-            axisLine={{ stroke: "#4b5563" }}
+            tick={{ fill: "rgba(33, 42, 31, 0.5)", fontSize: 11 }}
+            tickLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
+            axisLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
             interval="preserveStartEnd"
             minTickGap={50}
           />
           <YAxis
-            tick={{ fill: "#9ca3af", fontSize: 11 }}
-            tickLine={{ stroke: "#4b5563" }}
-            axisLine={{ stroke: "#4b5563" }}
+            tick={{ fill: "rgba(33, 42, 31, 0.5)", fontSize: 11 }}
+            tickLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
+            axisLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
             domain={[minPnl - padding, maxPnl + padding]}
             tickFormatter={(value) => `$${value.toFixed(0)}`}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1f2937",
-              border: "1px solid #374151",
+              backgroundColor: "#e6e2c8",
+              border: "1px solid rgba(33, 42, 31, 0.2)",
               borderRadius: "8px",
               padding: "10px",
+              color: "#212a1f",
             }}
-            labelStyle={{ color: "#9ca3af" }}
+            labelStyle={{ color: "rgba(33, 42, 31, 0.6)" }}
             formatter={(value) => {
               const numValue = Number(value) || 0;
               return [
@@ -97,17 +92,17 @@ export default function PnLChart({ data }: PnLChartProps) {
             }}
             labelFormatter={(label) => label}
           />
-          <ReferenceLine y={0} stroke="#6b7280" strokeDasharray="3 3" />
+          <ReferenceLine y={0} stroke="rgba(33, 42, 31, 0.3)" strokeDasharray="3 3" />
           <Line
             type="monotone"
             dataKey="pnl"
-            stroke={chartData[chartData.length - 1]?.pnl >= 0 ? "#22c55e" : "#ef4444"}
+            stroke={lineColor}
             strokeWidth={2}
             dot={false}
             activeDot={{
               r: 6,
-              fill: chartData[chartData.length - 1]?.pnl >= 0 ? "#22c55e" : "#ef4444",
-              stroke: "#fff",
+              fill: lineColor,
+              stroke: "#e6e2c8",
               strokeWidth: 2,
             }}
             fill="url(#pnlGradient)"

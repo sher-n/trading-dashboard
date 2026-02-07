@@ -18,7 +18,7 @@ interface SymbolStatsProps {
 export default function SymbolStats({ data }: SymbolStatsProps) {
   if (!data || Object.keys(data).length === 0) {
     return (
-      <div className="h-[200px] flex items-center justify-center text-gray-500">
+      <div className="h-[200px] flex items-center justify-center text-[var(--text)]/50">
         No symbol data available
       </div>
     );
@@ -44,30 +44,31 @@ export default function SymbolStats({ data }: SymbolStatsProps) {
           layout="vertical"
           margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" horizontal={true} vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(33, 42, 31, 0.12)" horizontal={true} vertical={false} />
           <XAxis
             type="number"
-            tick={{ fill: "#9ca3af", fontSize: 11 }}
-            tickLine={{ stroke: "#4b5563" }}
-            axisLine={{ stroke: "#4b5563" }}
+            tick={{ fill: "rgba(33, 42, 31, 0.5)", fontSize: 11 }}
+            tickLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
+            axisLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
             tickFormatter={(value) => `$${value}`}
           />
           <YAxis
             type="category"
             dataKey="symbol"
-            tick={{ fill: "#9ca3af", fontSize: 11 }}
-            tickLine={{ stroke: "#4b5563" }}
-            axisLine={{ stroke: "#4b5563" }}
+            tick={{ fill: "rgba(33, 42, 31, 0.5)", fontSize: 11 }}
+            tickLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
+            axisLine={{ stroke: "rgba(33, 42, 31, 0.2)" }}
             width={55}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1f2937",
-              border: "1px solid #374151",
+              backgroundColor: "#e6e2c8",
+              border: "1px solid rgba(33, 42, 31, 0.2)",
               borderRadius: "8px",
               padding: "10px",
+              color: "#212a1f",
             }}
-            labelStyle={{ color: "#fff", fontWeight: "bold" }}
+            labelStyle={{ color: "#212a1f", fontWeight: "bold" }}
             formatter={(value, _name, props) => {
               const numValue = Number(value) || 0;
               const item = (props as any).payload;
@@ -81,7 +82,7 @@ export default function SymbolStats({ data }: SymbolStatsProps) {
             {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={entry.pnl >= 0 ? "#22c55e" : "#ef4444"}
+                fill={entry.pnl >= 0 ? "#298931" : "#a01c1a"}
               />
             ))}
           </Bar>
