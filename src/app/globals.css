@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #e6e2c8;
+  --bg: #ffffff;
   --text: #212a1f;
   --green: #298931;
   --red: #a01c1a;
@@ -29,7 +29,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(33, 42, 31, 0.3);
+  background: rgba(239, 245, 237, 0.89);
   border-radius: 4px;
 }
 
