@@ -11,6 +11,7 @@
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
+  --font-sans: "Arvo", serif;
 }
 
 body {
