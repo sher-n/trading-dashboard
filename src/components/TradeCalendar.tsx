@@ -160,7 +160,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
         {weekdays.map((day) => (
           <div
             key={day}
-            className="text-center text-[9px] text-[var(--text)]/40 font-medium"
+            className="text-center text-[15px] text-[var(--text)]/40 font-medium"
           >
             {day}
           </div>
@@ -192,7 +192,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {/* Top row: date (left) + trade count (right) */}
               <div className="flex items-start justify-between">
                 <span
-                  className={`text-[8px] font-medium leading-none ${
+                  className={`text-[12px] font-medium leading-none ${
                     data ? "text-[var(--text)]/70" : "text-[var(--text)]/25"
                   }`}
                 >
@@ -209,7 +209,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
               {data && (
                 <div className="flex justify-end">
                   <span
-                    className={`text-[9px] font-bold leading-none ${
+                    className={`text-[15px] font-bold leading-none ${
                       data.pnl >= 0 ? "text-[var(--green)]" : "text-[var(--red)]"
                     }`}
                   >
@@ -232,7 +232,7 @@ export default function TradeCalendar({ trades }: TradeCalendarProps) {
                     })}
                   </p>
                   <p
-                    className={`text-xs font-bold ${
+                    className={`text-md font-bold ${
                       data.pnl >= 0 ? "text-[var(--green)]" : "text-[var(--red)]"
                     }`}
                   >
